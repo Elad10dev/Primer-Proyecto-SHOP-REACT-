@@ -17,6 +17,17 @@ function App() {
   const [data, setData] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
 
+  function addToCart(item: Product) {
+    const itemExists = cart.find((guitar) => guitar.id === item.id);
+
+    if (itemExists) {
+      console.log('El item ya existe en el carrito');
+    } else {
+      console.log('El item no existe, agregando...!');
+      setCart([...cart, item]);
+    }
+  }
+
   useEffect(() => {
     setData(db);
   }, []);
@@ -35,8 +46,7 @@ function App() {
             <Articulo
               key={guitar.id}
               guitar={guitar}
-              cart={cart}
-              setCart={setCart}
+              addToCart={addToCart}
             />
           ))}
         </div>
