@@ -141,6 +141,7 @@
 }
 
 body {
+  display: flex;
   margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);

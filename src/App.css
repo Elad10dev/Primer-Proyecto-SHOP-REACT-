@@ -1,3 +1,210 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-xl {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
+
+.header img {
+  max-width: 100%;
+}
+
+.main {
+  padding: 20px 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.col-lg-4, .col-md-6 {
+  padding: 10px;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain; /* Cambiado a 'contain' para asegurar que la imagen no se corte */
+}
+
+.card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* número de líneas que quieres mostrar */
+  -webkit-box-orient: vertical;
+}
+
+.card-text .read-more {
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-decoration: underline;
+}
+
+.card-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.card button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: auto;
+}
+
+.card button:hover {
+  background-color: #555;
+}
+
+/* Estilos de paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #555;
+}
+
+/* Estilos del carrito */
+.carrito {
+  position: relative;
+}
+
+.carrito img {
+  cursor: pointer;
+}
+
+#carrito {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.carrito:hover #carrito {
+  display: block;
+}
+
+#carrito table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#carrito th, #carrito td {
+  padding: 10px;
+  text-align: left;
+}
+
+#carrito th {
+  background-color: #f4f4f4;
+}
+
+#carrito td img {
+  max-width: 50px;
+  height: auto;
+}
+
+#carrito .btn {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#carrito .btn-dark {
+  background-color: #333;
+  color: white;
+}
+
+#carrito .btn-dark:hover {
+  background-color: #555;
+}
+
+#carrito .btn-danger {
+  background-color: #d9534f;
+  color: white;
+}
+
+#carrito .btn-danger:hover {
+  background-color: #c9302c;
+}
+
+#carrito .text-end {
+  text-align: right;
+}
+
+#carrito .fw-bold {
+  font-weight: bold;
+}
+
+/* Estilos adicionales */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,9 +218,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
