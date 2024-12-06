@@ -51,9 +51,32 @@ function App() {
 
   console.log(data);
 
+  const incrementQuantity = (id: number) => {
+    setCart(cart.map((guitar) =>
+      guitar.id === id ? { ...guitar, quantity: (guitar.quantity || 1) + 1 } : guitar
+    ));
+  };
+
+  const decrementQuantity = (id: number) => {
+    setCart(cart.map((guitar) =>
+      guitar.id === id ? { ...guitar, quantity: (guitar.quantity && guitar.quantity > 1) ? guitar.quantity - 1 : 1 } : guitar
+    ));
+  };
+
+  function itemDelete(id: number) {
+    setCart(cart.filter((guitar) => guitar.id !== id));
+    console.log("Eliminando", id);
+  }
+
   return (
     <>
-      <Header cart={cart} totalAmount={totalAmount} />
+      <Header 
+        cart={cart} 
+        totalAmount={totalAmount} 
+        itemDelete={itemDelete}
+        incrementQuantity={incrementQuantity}
+        decrementQuantity={decrementQuantity}
+      />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>

@@ -13,9 +13,12 @@ interface Product {
 interface HeaderProps {
   cart: Product[];
   totalAmount: number;
+  itemDelete: (id: number) => void;
+  incrementQuantity: (id: number) => void;
+  decrementQuantity: (id: number) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ cart, totalAmount }) => {
+const Header: React.FC<HeaderProps> = ({ cart, totalAmount, itemDelete, incrementQuantity, decrementQuantity }) => {
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -31,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ cart, totalAmount }) => {
 
               <div id="carrito" className="bg-white p-3">
                 {cart.length === 0 ? (
-                  <p className="text-center">El carrito está vacío</p>
+                  <p className="text-center">El carrito está vacío..!</p>
                 ) : (
                   <>
                     <table className="w-100 table">
@@ -52,19 +55,33 @@ const Header: React.FC<HeaderProps> = ({ cart, totalAmount }) => {
                             </td>
                             <td>{guitar.name}</td>
                             <td className="fw-bold">${guitar.price}</td>
-                            <td className="flex align-items-start gap-4">
-                              <button type="button" className="btn btn-dark">-</button>
-                              {guitar.quantity}
-                              <button type="button" className="btn btn-dark">+</button>
+                            <td>
+                              <button
+                                className="btn btn-add"
+                                type="button"
+                                onClick={() => incrementQuantity(guitar.id)}
+                              >  +</button>
+
+                                <span className="quantity mx-2">{guitar.quantity}</span>
+
+                                <button
+                                className="btn btn-del"
+                                type="button"
+                                onClick={() => decrementQuantity(guitar.id)}
+                              >-</button>
                             </td>
                             <td>
-                              <button className="btn btn-danger" type="button">X</button>
+                              <button
+                                className="btn btn-danger"
+                                type="button"
+                                onClick={() => itemDelete(guitar.id)}
+                              >X</button>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
-                    <p className="text-end">Total a pagar: <span className="fw-bold">${totalAmount}</span></p>
+                    <p className="text-end"> <span className="highlight">Total a pagar:${totalAmount}</span></p>
                     <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                   </>
                 )}

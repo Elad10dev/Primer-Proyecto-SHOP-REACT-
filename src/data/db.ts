@@ -45,7 +45,7 @@ export const db = [
       id: 7,
       name: 'Cobain',
       image: 'guitarra_07',
-      description: 'Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
+      description: 'Morbi ornare augue nisl, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
       price: 349,
   },
   {
