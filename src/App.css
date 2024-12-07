@@ -180,6 +180,7 @@ body {
   padding: 5px 10px; 
   border: none; 
   cursor: pointer; 
+  font-size: .5rem 
 }
 
 #carrito .btn-dark { 
@@ -188,12 +189,12 @@ body {
 } 
 
 #carrito .btn-del { 
-  background-color: #3d0000; 
+  background-color: #521313; 
   color: white; 
 }
 
 #carrito .btn-add { 
-  background-color: #053d00; 
+  background-color: #13520e; 
   color: white; 
 }
 
@@ -202,11 +203,11 @@ body {
 }
 
 #carrito .btn-del:hover { 
-  background-color: #800000; 
+  background-color: #832424; 
 } 
 
 #carrito .btn-add:hover { 
-  background-color: #158000; 
+  background-color: #359622; 
 } 
 
 #carrito .btn-danger { 
@@ -215,7 +216,8 @@ body {
 } 
 
 #carrito .btn-danger:hover { 
-  background-color: #c9302c; 
+  background-color: #c9302c;
+   
 } 
 
 #carrito .text-end { 
