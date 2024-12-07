@@ -150,7 +150,9 @@ body {
 }
 
 #carrito .text-center {
-  background-color: #333;
+  font-size: larger; 
+  font-weight:lighter;
+  color: rgb(0, 0, 0);
   border-radius: 5px 5px 0 5%;
 }
 
@@ -225,8 +227,9 @@ body {
 } 
 
 #carrito .highlight { 
-  background-color: #333; 
-  color: white; 
+  font-size: larger; 
+  font-weight: bold;
+  color: rgb(0, 0, 0); 
   border-radius: 5px; 
   padding: 2px 5px; 
 } 
@@ -275,3 +278,5 @@ body {
   .read-the-docs { 
     color: #888; 
   }
+
+  

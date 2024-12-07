@@ -11,14 +11,23 @@ interface Product {
   image: string;
   description: string;
   price: number;
-  quantity?: number; // Añadido para manejar la cantidad
+  quantity?: number;
 }
 
 function App() {
-  const [data, setData] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
+  const initialCart = (): Product[] => {
+    const localStorageCart = localStorage.getItem('cart');
+    return localStorageCart ? JSON.parse(localStorageCart) : [];
+  };
+
+  const [data] = useState<Product[]>(db);
+  const [cart, setCart] = useState<Product[]>(initialCart);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // Ajustado para mostrar 6 elementos por página
+  
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]); // API LocalStorage, para que se guarde en el local del carrito
 
   const addToCart = (item: Product) => {
     const itemExists = cart.find((guitar) => guitar.id === item.id);
@@ -34,10 +43,6 @@ function App() {
       setCart([...cart, { ...item, quantity: 1 }]);
     }
   };
-
-  useEffect(() => {
-    setData(db);
-  }, []);
 
   const totalAmount = useMemo(() => {
     return cart.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
@@ -68,6 +73,16 @@ function App() {
     console.log("Eliminando", id);
   }
 
+  function clearCart() {
+    setCart([]);
+    console.log("Carrito vaciado");
+  }
+
+  function checkout() {
+    console.log("Checkout iniciado");
+    // Aquí puedes agregar la lógica para el checkout
+  }
+
   return (
     <>
       <Header 
@@ -76,6 +91,8 @@ function App() {
         itemDelete={itemDelete}
         incrementQuantity={incrementQuantity}
         decrementQuantity={decrementQuantity}
+        clearCart={clearCart}
+        checkout={checkout}
       />
 
       <main className="container-xl mt-5">
