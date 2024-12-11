@@ -1,11 +1,12 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Header from './componentes/Header';
 import Articulo from './componentes/Articulo';
 import { db } from './data/db';
+import useCart, { Product } from './hooks/useCart';
 
 // Define el tipo para los datos
-interface Product {
+interface ProductData {
   id: number;
   name: string;
   image: string;
@@ -15,38 +16,19 @@ interface Product {
 }
 
 function App() {
-  const initialCart = (): Product[] => {
-    const localStorageCart = localStorage.getItem('cart');
-    return localStorageCart ? JSON.parse(localStorageCart) : [];
-  };
+  const {
+    cart,
+    addToCart,
+    incrementQuantity,
+    decrementQuantity,
+    itemDelete,
+    clearCart,
+    totalAmount,
+  } = useCart();
 
-  const [data] = useState<Product[]>(db);
-  const [cart, setCart] = useState<Product[]>(initialCart);
+  const [data] = useState<ProductData[]>(db);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // Ajustado para mostrar 6 elementos por página
-  
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]); // API LocalStorage, para que se guarde en el local del carrito
-
-  const addToCart = (item: Product) => {
-    const itemExists = cart.find((guitar) => guitar.id === item.id);
-
-    if (itemExists) { // Existe en el carrito
-      const updatedCart = cart.map((guitar) =>
-        guitar.id === item.id ? { ...guitar, quantity: (guitar.quantity || 1) + 1 } : guitar
-      );
-      setCart(updatedCart);
-      console.log('El item ya existe en el carrito');
-    } else {
-      console.log('El item no existe, agregando...!');
-      setCart([...cart, { ...item, quantity: 1 }]);
-    }
-  };
-
-  const totalAmount = useMemo(() => {
-    return cart.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
-  }, [cart]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -55,28 +37,6 @@ function App() {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   console.log(data);
-
-  const incrementQuantity = (id: number) => {
-    setCart(cart.map((guitar) =>
-      guitar.id === id ? { ...guitar, quantity: (guitar.quantity || 1) + 1 } : guitar
-    ));
-  };
-
-  const decrementQuantity = (id: number) => {
-    setCart(cart.map((guitar) =>
-      guitar.id === id ? { ...guitar, quantity: (guitar.quantity && guitar.quantity > 1) ? guitar.quantity - 1 : 1 } : guitar
-    ));
-  };
-
-  function itemDelete(id: number) {
-    setCart(cart.filter((guitar) => guitar.id !== id));
-    console.log("Eliminando", id);
-  }
-
-  function clearCart() {
-    setCart([]);
-    console.log("Carrito vaciado");
-  }
 
   function checkout() {
     console.log("Checkout iniciado");
